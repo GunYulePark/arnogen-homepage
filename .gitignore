@@ -3,6 +3,8 @@
 /node_modules.incomplete-20260904
 .npm-ci.out
 .npm-ci.err
+.build.out
+.build.err
 *.tsbuildinfo
 /.pnp
 .pnp.*
