@@ -1,0 +1,1 @@
+export const navigation=[{label:'About Us',items:[{label:'회사소개',href:'/about/company'},{label:'사업장',href:'/about/facility'}]},{label:'Our Services',items:[{label:'Development',href:'/services/development'},{label:'Manufacturing',href:'/services/manufacturing'},{label:'Quality',href:'/services/quality'}]},{label:'PR',items:[{label:'보도자료',href:'/pr/news'}]}];

@@ -1,0 +1,3 @@
+import Link from 'next/link';import {news} from '@/content/news';import {PageHero} from '@/components/page-hero';
+export const metadata={title:'보도자료',description:'아르노젠의 주요 소식과 보도자료입니다.'};
+export default function NewsPage(){return <><PageHero eyebrow="PR / NEWSROOM" title="News & updates" description="아르노젠의 최신 소식과 주요 안내를 전합니다."/><section className="section wrap news-page-list">{news.map(item=><Link href={`/pr/news/${item.slug}`} className="news-card" key={item.slug}><div><span>{item.category}</span><time>{item.date}</time></div><h2>{item.title}</h2><p>{item.summary}</p><b>자세히 보기 →</b></Link>)}</section></>}

@@ -1,0 +1,4 @@
+import {MockImage} from '@/components/mock-image';import {PageHero} from '@/components/page-hero';
+const items=[['DRUG SUBSTANCE','원료의약품','생산 설비와 공정 흐름을 고려한 원료의약품 제조 기반을 준비합니다.'],['DRUG PRODUCT','완제의약품','제형과 충전 공정의 요구를 반영한 완제의약품 제조를 계획합니다.']];
+export const metadata={title:'Manufacturing',description:'아르노젠의 바이오의약품 제조 서비스를 소개합니다.'};
+export default function ManufacturingPage(){return <><PageHero eyebrow="OUR SERVICES / MANUFACTURING" title="Ready to make progress tangible." description="제조 공정의 일관성과 품질을 중심에 두고 생산 환경을 설계합니다."/><section className="section wrap service-detail-list">{items.map(([label,title,text])=><article key={label}><MockImage label={label} size="1200 × 800" ratio="3:2"/><div><p className="eyebrow">MANUFACTURING</p><h2>{title}</h2><p className="lead">{text}</p><dl className="data-list"><div><dt>생산 설비</dt><dd>추후 확정</dd></div><div><dt>예상 CAPA</dt><dd>추후 확정</dd></div></dl><p>제조 프로세스 및 설비 상세 정보는 운영 계획 확정 후 업데이트됩니다.</p></div></article>)}</section></>}

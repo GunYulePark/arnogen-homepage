@@ -1,0 +1,1 @@
+import type {MetadataRoute} from 'next';const base='https://arnozen-biologics.fairy-moose-7176.chatgpt.site';export default function sitemap():MetadataRoute.Sitemap{return ['/','/about/company','/about/facility','/services/development','/services/manufacturing','/services/quality','/pr/news','/contact','/privacy'].map(url=>({url:`${base}${url}`,lastModified:new Date()}))}
