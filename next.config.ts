@@ -1,16 +1,10 @@
 import type { NextConfig } from 'next';
 
-const repository = process.env.GITHUB_REPOSITORY?.split('/')[1];
-const owner = process.env.GITHUB_REPOSITORY?.split('/')[0];
-const basePath =
-  process.env.GITHUB_ACTIONS === 'true' && repository && owner && repository !== `${owner}.github.io`
-    ? `/${repository}`
-    : '';
+const assetPrefix = process.env.NEXT_PUBLIC_BASE_PATH?.replace(/\/$/, '') || undefined;
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath,
-  assetPrefix: basePath || undefined,
+  assetPrefix,
 };
 
 export default nextConfig;
