@@ -1,25 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
+import {useEffect,useRef} from 'react';
 
-export function ScrollEffects() {
-  useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const targets = document.querySelectorAll<HTMLElement>('.reveal, .service-card, .process-step, .news-row, .news-card');
-
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      targets.forEach((target) => target.classList.add('is-visible'));
-      return;
-    }
-
-    targets.forEach((target) => target.classList.add('will-reveal'));
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')),
-      { threshold: 0.14 },
-    );
-    targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
-  }, []);
-
-  return null;
-}
+export function ScrollEffects(){const progressRef=useRef<HTMLSpanElement>(null);const topRef=useRef<HTMLButtonElement>(null);useEffect(()=>{const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;const targets=document.querySelectorAll<HTMLElement>('.reveal, .service-card, .process-step, .news-row, .news-card, .value-grid article, .feature-list div, .service-detail-list article, .quality-grid article');const update=()=>{const max=document.documentElement.scrollHeight-window.innerHeight;progressRef.current?.style.setProperty('transform',`scaleX(${max?window.scrollY/max:0})`);topRef.current?.classList.toggle('is-visible',window.scrollY>650)};update();window.addEventListener('scroll',update,{passive:true});if(reduceMotion||!('IntersectionObserver'in window)){targets.forEach(target=>target.classList.add('is-visible'));return()=>window.removeEventListener('scroll',update)}targets.forEach(target=>target.classList.add('will-reveal'));const observer=new IntersectionObserver(entries=>entries.forEach(entry=>entry.isIntersecting&&entry.target.classList.add('is-visible')),{threshold:.14});targets.forEach(target=>observer.observe(target));return()=>{observer.disconnect();window.removeEventListener('scroll',update)}},[]);return <><div className="scroll-progress" aria-hidden="true"><span ref={progressRef}/></div><button ref={topRef} className="scroll-top" type="button" aria-label="페이지 상단으로 이동" onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}>↑</button></>}
