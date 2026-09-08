@@ -1,0 +1,13 @@
+'use client';
+
+import {useEffect,useState} from 'react';
+import {MockImage} from '@/components/mock-image';
+import {sitePath} from '@/lib/site-path';
+
+const slides=[
+  {eyebrow:'ARNOZEN BIOLOGICS CDMO',title:'Building the Future of Biologics',description:'아르노젠은 바이오의약품 개발과 생산을 연결하는 신뢰받는 CDMO 파트너를 지향합니다.',href:'/services/development',label:'Our Services',image:'/images/새벽의 바이오 클린룸 설비 점검.png',alt:'일출이 비치는 바이오의약품 제조 설비와 연구원',position:'68% center'},
+  {eyebrow:'OUR VISION',title:'바이오의약품의 가능성을 실현하는 연결의 중심',description:'개발과 생산의 모든 접점에서 신뢰할 수 있는 실행력을 제공하며, 고객의 다음 단계를 함께 준비합니다.',href:'/about/company',label:'비전 살펴보기',image:'/images/현대 산업 오피스 캠퍼스와 조경 도로.png',alt:'조경과 도로를 갖춘 현대적 바이오 캠퍼스',position:'center'},
+  {eyebrow:'ABOUT ARNOZEN',title:'개발의 가능성을 생산의 신뢰로 연결합니다.',description:'과학적 전문성과 체계적인 실행력을 바탕으로 개발부터 제조와 품질까지 연결된 관점으로 프로젝트에 임합니다.',href:'/about/company',label:'회사소개 보기',image:'/images/현대적인 연구실의 과학자와 분석 장비.png',alt:'분석 장비를 점검하는 연구원',position:'65% center'},
+];
+
+export function HeroCarousel(){const[active,setActive]=useState(0);const[paused,setPaused]=useState(false);const go=(direction:number)=>setActive(current=>(current+direction+slides.length)%slides.length);useEffect(()=>{if(paused||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const timer=window.setTimeout(()=>go(1),3000);return()=>window.clearTimeout(timer)},[active,paused]);return <section className="hero hero-carousel" aria-roledescription="carousel" aria-label="아르노젠 소개"><div className="hero-carousel-track" style={{transform:`translateX(-${active*(100/slides.length)}%)`}}>{slides.map((slide,index)=><div className="hero-carousel-slide" aria-hidden={index!==active} key={slide.eyebrow}><div className="hero-copy wrap"><p className="eyebrow light">{slide.eyebrow}</p><h1>{slide.title}</h1><p className="hero-description">{slide.description}</p><div className="hero-actions"><a className="button button-light" href={sitePath(slide.href)} tabIndex={index===active?0:-1}>{slide.label} <span>→</span></a></div></div><div className="hero-art hero-carousel-art"><MockImage label="MAIN VISUAL" size="1920 × 1080" ratio="16:9" variant="hero" src={slide.image} alt={slide.alt}/><p className="hero-status" aria-hidden="true"><span>0{index+1}</span>{slide.eyebrow}</p></div></div>)}</div><div className="hero-carousel-progress" aria-hidden="true"><span className="hero-progress-track"><span className={`hero-progress-fill ${paused?'is-paused':''}`} key={active}/></span><b>0{active+1} / 0{slides.length}</b></div><div className="hero-carousel-nav" onMouseEnter={()=>setPaused(true)} onMouseLeave={()=>setPaused(false)}><button type="button" aria-label="이전 소개 화면" onClick={()=>go(-1)}>←</button><button type="button" aria-label="다음 소개 화면" onClick={()=>go(1)}>→</button></div></section>}

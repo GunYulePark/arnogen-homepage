@@ -3,13 +3,13 @@ import { facility } from '@/content/facility';
 import { latestNews } from '@/content/news';
 import { services } from '@/content/services';
 import { MockImage } from '@/components/mock-image';
-import { HeroVisual } from '@/components/hero-visual';
+import { HeroCarousel } from '@/components/hero-carousel';
 import { ProcessExperience } from '@/components/process-experience';
 import { sitePath } from '@/lib/site-path';
 
 export default function Home() {
   return <div className="home-page">
-    <section className="hero" aria-labelledby="hero-title"><div className="hero-copy wrap"><p className="eyebrow light">ARNOZEN BIOLOGICS CDMO</p><h1 id="hero-title">{company.hero.title}</h1><p className="hero-description">{company.hero.description}</p><div className="hero-actions"><a className="button button-light" href={sitePath('/services/development')}>Our Services <span>→</span></a><a className="text-link light-link" href={sitePath('/contact')}>Contact Us <span>↗</span></a></div></div><HeroVisual/></section>
+    <HeroCarousel/>
     <section id="about-arnozen" className="section wrap intro-grid reveal"><div><p className="eyebrow">ABOUT ARNOZEN</p><h2>개발의 가능성을<br />생산의 신뢰로 연결합니다.</h2></div><div className="intro-copy"><p>{company.overview}</p><a href={sitePath('/about/company')} className="text-link">회사소개 보기 <span>→</span></a></div></section>
     <section className="section services-section"><div className="wrap"><div className="section-heading"><div><p className="eyebrow">OUR SERVICES</p><h2>Integrated expertise.<br />One focused partner.</h2></div><p>개발 초기부터 상업 생산까지, 프로젝트의 다음 단계를 함께 설계합니다.</p></div><div className="service-grid">{services.map((service,index)=><a href={sitePath(service.href)} className="service-card" key={service.name}><MockImage label={service.mockLabel} size="1200 × 800" ratio="3:2" variant={`service-${index}`} src={service.image} alt={service.alt}/><div className="service-card-body"><p className="card-number">0{index+1}</p><h3>{service.name}</h3><p>{service.shortDescription}</p><span className="card-arrow">→</span></div></a>)}</div></div></section>
     <ProcessExperience/>
